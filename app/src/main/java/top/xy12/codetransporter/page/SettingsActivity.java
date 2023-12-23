@@ -16,11 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText phoneNumberEditText;
     private EditText mqttUrlEditText;
     private EditText mqttTopicEditText;
-
-    private static final String PREF_NAME = "MyPreferences";
-    private static final String KEY_PHONE_NUMBER = "phoneNumber";
-    private static final String KEY_MQTT_URL = "mqttUrl";
-    private static final String KEY_MQTT_TOPIC = "mqttTopic";
+    private EditText mqttTopicCallEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +27,10 @@ public class SettingsActivity extends AppCompatActivity {
         phoneNumberEditText = findViewById(R.id.phoneNumber);
         mqttUrlEditText = findViewById(R.id.mqttUrl);
         mqttTopicEditText = findViewById(R.id.mqttTopic);
+        mqttTopicCallEditText = findViewById(R.id.mqttTopicCall);
 
         // 从SharedPreferences获取值，如果没有则使用默认值
-        loadPreferences();
+        loadPreferences(getApplicationContext());
 
         Button confirmButton = findViewById(R.id.confirmButton);
         confirmButton.setOnClickListener(this::onConfirmButtonClick);
@@ -43,36 +40,34 @@ public class SettingsActivity extends AppCompatActivity {
         String phoneNumber = phoneNumberEditText.getText().toString();
         String mqttUrl = mqttUrlEditText.getText().toString();
         String mqttTopic = mqttTopicEditText.getText().toString();
+        String mqttTopicCall = mqttTopicCallEditText.getText().toString();
 
         // 保存数据到SharedPreferences
-        savePreferences(phoneNumber, mqttUrl, mqttTopic);
+        savePreferences(phoneNumber, mqttUrl, mqttTopic, mqttTopicCall);
 
         // 显示成功提示
         Toast.makeText(this, "保存成功！", Toast.LENGTH_SHORT).show();
     }
 
-    private void savePreferences(String phoneNumber, String mqttUrl, String mqttTopic) {
-        SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+    private void savePreferences(String phoneNumber, String mqttUrl, String mqttTopic, String mqttTopicCall) {
+        SharedPreferences sharedPreferences = getSharedPreferences(AppConf.PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(KEY_PHONE_NUMBER, phoneNumber);
-        editor.putString(KEY_MQTT_URL, mqttUrl);
-        editor.putString(KEY_MQTT_TOPIC, mqttTopic);
+        editor.putString(AppConf.KEY_PHONE_NUMBER, phoneNumber);
+        editor.putString(AppConf.KEY_MQTT_URL, mqttUrl);
+        editor.putString(AppConf.KEY_MQTT_TOPIC, mqttTopic);
+        editor.putString(AppConf.KEY_MQTT_TOPIC_CAll, mqttTopicCall);
 
         editor.apply();
     }
 
-    private void loadPreferences() {
-        SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-
-        // 从SharedPreferences获取值，如果没有则使用默认值
-        String phoneNumber = sharedPreferences.getString(KEY_PHONE_NUMBER, AppConf.phoneNumber);
-        String mqttUrl = sharedPreferences.getString(KEY_MQTT_URL, AppConf.mqttUrl);
-        String mqttTopic = sharedPreferences.getString(KEY_MQTT_TOPIC, AppConf.mqttTopic);
-
+    private void loadPreferences(Context context) {
+        // 加载缓存的数据
+        AppConf.loadFromSharedPreferences(context);
         // 将加载的数据设置到相应的EditText中
-        phoneNumberEditText.setText(phoneNumber);
-        mqttUrlEditText.setText(mqttUrl);
-        mqttTopicEditText.setText(mqttTopic);
+        phoneNumberEditText.setText(AppConf.phoneNumber);
+        mqttUrlEditText.setText(AppConf.mqttUrl);
+        mqttTopicEditText.setText(AppConf.mqttTopic);
+        mqttTopicCallEditText.setText(AppConf.mqttTopicCall);
     }
 }

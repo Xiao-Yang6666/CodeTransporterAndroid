@@ -59,17 +59,29 @@
                 android:layout_height="wrap_content"
                 android:hint="tcp://124.222.11.237:1883"
                 android:inputType="textUri"/>
-        <!-- MQTT主题 -->
+        <!-- MQTT主题, 短信 -->
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MQTT主题:" />
+                android:text="MQTT主题,短信:" />
 
         <EditText
                 android:id="@+id/mqttTopic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="sms/topic"
+                android:inputType="text" />
+        <!-- MQTT主题, 来电 -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MQTT主题,来电:" />
+
+        <EditText
+                android:id="@+id/mqttTopicCall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="call/topic"
                 android:inputType="text" />
     </LinearLayout>
 
