@@ -38,6 +38,8 @@ public class CallReceiver extends BroadcastReceiver {
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("incomingPhoneNumber", incomingNumber);
                         jsonObject.put("phoneNumberLocation", carrier);
+                        jsonObject.put("phoneNumber", AppConf.phoneNumber);
+                        jsonObject.put("type", "call");
                         publishCallViaMqtt(context, jsonObject.toJSONString());
                     }
 

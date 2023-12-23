@@ -21,12 +21,6 @@ import java.util.regex.Pattern;
  * @date 2023/12/20 21:04
  */
 public class SmsReceiver extends BroadcastReceiver {
-    private static final String MQTT_TOPIC = "sms/topic";
-
-    private static final String PREF_NAME = "MyPreferences";
-    private static final String KEY_MQTT_TOPIC = "mqttTopic";
-
-
     @SuppressLint("UnsafeProtectedBroadcastReceiver")
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -64,6 +58,7 @@ public class SmsReceiver extends BroadcastReceiver {
             }
             jsonObject.put("smsMsg", message);
             jsonObject.put("phoneNumber", AppConf.phoneNumber);
+            jsonObject.put("type", "sms");
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
