@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".page.SettingsActivity">
+
+    <!-- 头部框 -->
+    <RelativeLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/top"
+            tools:ignore="MissingConstraints">
+
+        <!-- 中间文本 -->
+        <TextView
+                android:id="@+id/helloText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="基本配置"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="19sp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/headerLayout"
+            android:layout_above="@+id/bottomButtonsLayout"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+        <!-- 手机号 -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号码:" />
+
+        <EditText
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        <!-- MQTT服务端地址 -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MQTT服务端地址:" />
+
+        <EditText
+                android:id="@+id/mqttUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="tcp://124.222.11.237:1883"
+                android:inputType="textUri"/>
+        <!-- MQTT主题 -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MQTT主题:" />
+
+        <EditText
+                android:id="@+id/mqttTopic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="sms/topic"
+                android:inputType="text" />
+    </LinearLayout>
+
+    <!-- 底部按钮 -->
+    <LinearLayout
+            android:id="@+id/bottomButtonsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:layout_alignParentBottom="true" > <!-- 应用上边框阴影 -->
+
+        <!-- 确认按钮 -->
+        <Button
+                android:id="@+id/confirmButton"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="确认"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"/> <!-- 添加间距 -->
+    </LinearLayout>
+
+</RelativeLayout>
